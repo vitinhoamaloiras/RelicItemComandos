@@ -1,0 +1,3 @@
+com\relicitemcomandos\events\ActivatorUseListener.class
+com\relicitemcomandos\commands\ActivatorCommand.class
+com\relicitemcomandos\BootstrapPlugin.class

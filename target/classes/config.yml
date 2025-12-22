@@ -1,0 +1,15 @@
+activators:
+  item_1:
+    name: "&aAtivador de Teste"
+    lore:
+      - "&7Clique para usar o ativador!"
+    texture: "http://textures.minecraft.net/texture/12919c67317c7678438ff520c98dde0e3b4d68769c8938a5a3de2968edfc7314"
+    command: "gamemode 1 %player%"
+
+messages:
+  no_player: "&cApenas jogadores podem executar este comando!"
+  usage_give: "&cUso correto: /activator give <player> <activator>"
+  player_not_found: "&cJogador não encontrado!"
+  activator_not_found: "&cActivator não encontrado!"
+  activator_given: "&aActivator entregue para &e%player%"
+  activator_used: "&aVocê usou o activator &e%activator%"

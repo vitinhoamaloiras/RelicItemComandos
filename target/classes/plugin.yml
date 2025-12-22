@@ -1,0 +1,8 @@
+name: RelicItemComandos
+version: '1.0.0'
+main: com.relicitemcomandos.BootstrapPlugin
+load: STARTUP
+depend: [ RelicPlugins ]
+authors: [ vitinhoamaloiras ]
+description: Crie items que executam comandos.
+website: www.relicplugins.com
