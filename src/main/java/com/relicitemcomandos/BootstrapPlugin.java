@@ -23,7 +23,6 @@ public final class BootstrapPlugin extends JavaPlugin {
         File configFile = new File(getDataFolder(), "config.yml");
         if (!configFile.exists()) {
             saveDefaultConfig();
-            getLogger().info("config.yml not found. Using default configuration file.");
         }
         PluginClassLoader classLoader = new PluginClassLoader(this);
         getServer().getPluginManager().registerEvents(new ActivatorUseListener(this), this);

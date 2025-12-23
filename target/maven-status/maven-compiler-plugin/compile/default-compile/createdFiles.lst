@@ -1,3 +1,5 @@
+com\relicitemcomandos\actionbar\ActionBar$1.class
 com\relicitemcomandos\events\ActivatorUseListener.class
 com\relicitemcomandos\commands\ActivatorCommand.class
 com\relicitemcomandos\BootstrapPlugin.class
+com\relicitemcomandos\actionbar\ActionBar.class

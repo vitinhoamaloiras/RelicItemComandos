@@ -34,24 +34,30 @@ public class ActivatorCommand extends BukkitCommand {
         Map<String, Object> activators = BootstrapPlugin.getInstance().getConfig().getConfigurationSection("activators").getValues(false);
 
         player.sendMessage(color("§aLista de ativadores:"));
-
         activators.keySet().forEach(key ->
                 player.sendMessage(color("§f- §e" + key))
         );
-
 
         return true;
     }
 
     @Subcommand("give")
     public boolean onSubCommand(BukkitSender sender, String[] args) {
-        if (args.length < 2) {
+        if (args.length < 3) {
             sender.sendMessage(color(BootstrapPlugin.getInstance().getConfig().getString("messages.usage_give")));
             return true;
         }
 
         String playerName = args[0];
         String activatorKey = args[1];
+        int usos;
+
+        try {
+            usos = Integer.parseInt(args[2]);
+        } catch (NumberFormatException e) {
+            sender.sendMessage(color("&cNúmero de usos inválido!"));
+            return true;
+        }
 
         Player target = Bukkit.getPlayer(playerName);
         if (target == null) {
@@ -64,38 +70,81 @@ public class ActivatorCommand extends BukkitCommand {
             return true;
         }
 
-        ItemStack item = createActivatorItem(target, activatorKey);
+        ItemStack item = createActivatorItem(target, activatorKey, usos);
         target.getInventory().addItem(item);
-        sender.sendMessage(color(BootstrapPlugin.getInstance().getConfig().getString("messages.activator_given").replace("%player%", target.getName())));
+
+        sender.sendMessage(color(BootstrapPlugin.getInstance().getConfig().getString("messages.activator_given")
+                .replace("%player%", target.getName())
+        ));
 
         return true;
     }
 
-    private ItemStack createActivatorItem(Player player, String activatorKey) {
-        var config = BootstrapPlugin.getInstance().getConfig().getConfigurationSection("activators." + activatorKey);
+    private ItemStack createActivatorItem(Player player, String activatorKey, int usos) {
+        var config = BootstrapPlugin.getInstance()
+                .getConfig()
+                .getConfigurationSection("activators." + activatorKey);
 
+        if (config == null) {
+            throw new IllegalArgumentException("Activator not found: " + activatorKey);
+        }
+
+        boolean customHead = config.getBoolean("custom-head", false);
         ItemStack item;
-        if (config.contains("texture")) {
+
+        if (customHead) {
+            String texture = config.getString("texture");
+
+            if (texture == null || texture.isEmpty()) {
+                throw new IllegalArgumentException("Texture not defined of activator: " + activatorKey);
+            }
+
             item = XSkull.createItem()
-                    .profile(Profileable.of(ProfileInputType.TEXTURE_URL, config.getString("texture")))
+                    .profile(Profileable.of(ProfileInputType.TEXTURE_URL, texture))
                     .apply();
         } else {
-            String[] parts = config.getString("item").split(":");
-            Material mat = Material.getMaterial(parts[0].toUpperCase());
-            int data = parts.length > 1 ? Integer.parseInt(parts[1]) : 0;
-            item = new ItemStack(mat, 1, (short) data);
+            String itemString = config.getString("item");
+
+            if (itemString == null) {
+                throw new IllegalArgumentException("Item not defined of activator: " + activatorKey);
+            }
+
+            String[] parts = itemString.split(":");
+            String materialName = parts[0].trim().toUpperCase();
+
+            Material mat = Material.getMaterial(materialName);
+            if (mat == null) {
+                throw new IllegalArgumentException("Invalid Material: " + materialName);
+            }
+
+            short data = 0;
+            if (parts.length > 1) {
+                try {
+                    data = Short.parseShort(parts[1]);
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("Invalid item DATA: " + itemString);
+                }
+            }
+
+            item = new ItemStack(mat, 1, data);
         }
 
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(color(config.getString("name").replace("%player%", player.getName())));
+
+        meta.setDisplayName(color(
+                config.getString("name", "&fAtivador").replace("%player%", player.getName())
+        ));
 
         List<String> lore = config.getStringList("lore");
         for (int i = 0; i < lore.size(); i++) {
-            lore.set(i, color(lore.get(i).replace("%player%", player.getName())));
+            lore.set(i, color(lore.get(i)
+                    .replace("%player%", player.getName())
+                    .replace("{usos}", String.valueOf(usos)))); // substitui {usos} pelo valor passado
         }
-        meta.setLore(lore);
 
+        meta.setLore(lore);
         item.setItemMeta(meta);
+
         return item;
     }
 

@@ -1,15 +1,30 @@
 activators:
   item_1:
-    name: "&aAtivador de Teste"
-    lore:
-      - "&7Clique para usar o ativador!"
-    texture: "http://textures.minecraft.net/texture/12919c67317c7678438ff520c98dde0e3b4d68769c8938a5a3de2968edfc7314"
-    command: "gamemode 1 %player%"
+    som: 'ORB_PICKUP' # Som enviado ao ativar um item
+    som-error: 'VILLAGER_NO' # Som de erro ao tentar ativar um item
+    delay: 60 # Tempo em segundos para ativar outro item
+    block-inv-full: true # Permite ou não ativar um item com o inventário cheio
+    custom-head: true # Ative caso for utilizar uma cabeça customizada
+    use-title: true # Ative caso queira que apareça um título na tela ao ativar um item
+    use-actionbar: true # Ative caso queira utilizar actionbar ao ativar um item
+    title: '&aObrigado por ativar este item!' # Titulo que irá aparecer na tela
+    actionbar: '&bObrigado!' # Actionbar que irá aparecer
+    item: 'STONE:0' # Use MATERIAL:ID caso custom-head for 'false'
+    name: '&aAtivador de Teste' # DisplayName do item
+    lore: # Descrição do item
+      - '&7Usos: &a{usos}&7.' # Use '{usos}' para mostrar a quantidade de usos do item
+      - ''
+      - '&7Clique para usar o ativador!'
+    texture: 'http://textures.minecraft.net/texture/24c22b8df0a853a49cb82e90a618d65012122361c8398062fcbaf74d5696c2a9'
+    # Coloque uma textura caso 'custom-head' for 'true'
+    command: 'gamemode 1 %player%' # Comando que o item irá executar
 
 messages:
-  no_player: "&cApenas jogadores podem executar este comando!"
-  usage_give: "&cUso correto: /activator give <player> <activator>"
-  player_not_found: "&cJogador não encontrado!"
-  activator_not_found: "&cActivator não encontrado!"
-  activator_given: "&aActivator entregue para &e%player%"
-  activator_used: "&aVocê usou o activator &e%activator%"
+  no_player: '&cApenas jogadores podem executar este comando!' # Mensagem que irá ser enviada caso o console execute o comando
+  usage_give: '&cUso correto: /activator give <player> <activator> <usos>' # Mensagem de uso correto
+  player_not_found: '&cJogador não encontrado!' # Mensagem de jogador não encontrado
+  activator_not_found: '&cAtivador não encontrado!' # Mensagem de ativador não encontrado
+  activator_given: '&aAtivador entregue para &e%player%' # Mensagem de ativador entregue
+  activator_used: '&aVocê usou o ativador &e%activator%' # Mensagem enviada ao utilizar um ativador
+  activator_cooldown: '&cEspere &e{time} &csegundos para usar este ativador novamente!' # Mensagem de delay para utilizar outro ativador
+  inventory_full: '&cSeu inventário está cheio!' # Mensagem de inventário cheio
