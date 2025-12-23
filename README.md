@@ -7,7 +7,7 @@ Crie itens que executam comandos.
 |Comando         |Descrição                      |Permissão                    |
 |----------------|-------------------------------|-----------------------------|
 |/activator |Mostra a lista de itens|relicitemcomandos.admin.command    |
-|/activator give <player> <item> <usos> |Envia um item para um player|relicitemcomandos.admin.command    |
+|/activator give |Envia um item para um player|relicitemcomandos.admin.command    |
 
 
 ## Download
