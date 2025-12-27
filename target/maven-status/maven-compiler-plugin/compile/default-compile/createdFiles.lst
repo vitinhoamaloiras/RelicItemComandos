@@ -1,5 +1,14 @@
+com\relicitemcomandos\animation\Animation.class
+com\relicitemcomandos\animation\SimpleAnimation$FloatingBlock.class
 com\relicitemcomandos\actionbar\ActionBar$1.class
+com\relicitemcomandos\animation\Animation$1.class
+com\relicitemcomandos\packet\ActivatorAnimation.class
+com\relicitemcomandos\packet\ActivatorAnimation$AnimationData.class
+com\relicitemcomandos\animation\SimpleAnimation.class
 com\relicitemcomandos\events\ActivatorUseListener.class
+com\relicitemcomandos\packet\ActivatorAnimation$1.class
 com\relicitemcomandos\commands\ActivatorCommand.class
 com\relicitemcomandos\BootstrapPlugin.class
 com\relicitemcomandos\actionbar\ActionBar.class
+com\relicitemcomandos\time\Cooldown.class
+com\relicitemcomandos\animation\Animation$BlockData.class

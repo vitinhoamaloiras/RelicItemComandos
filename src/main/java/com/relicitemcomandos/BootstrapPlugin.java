@@ -1,5 +1,6 @@
 package com.relicitemcomandos;
 
+import com.relicitemcomandos.animation.Animation;
 import com.relicitemcomandos.commands.ActivatorCommand;
 import com.relicitemcomandos.events.ActivatorUseListener;
 import com.relicplugins.plugins.platform.bukkit.resources.command.PluginClassLoader;
@@ -10,6 +11,8 @@ import java.io.File;
 
 public final class BootstrapPlugin extends JavaPlugin {
 
+    @Getter
+    private Animation animation;
     @Getter
     public static BootstrapPlugin instance;
 
@@ -24,6 +27,7 @@ public final class BootstrapPlugin extends JavaPlugin {
         if (!configFile.exists()) {
             saveDefaultConfig();
         }
+        animation = new Animation(this, this);
         PluginClassLoader classLoader = new PluginClassLoader(this);
         getServer().getPluginManager().registerEvents(new ActivatorUseListener(this), this);
         classLoader.loadCommand(ActivatorCommand.class);

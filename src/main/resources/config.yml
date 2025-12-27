@@ -19,6 +19,17 @@ activators:
     # Coloque uma textura caso 'custom-head' for 'true'
     command: 'gamemode 1 %player%' # Comando que o item irá executar
 
+animation:
+  use: true # Coloque 'false' caso não queira utilizar a animação
+  start-sound: 'ENDERMAN_TELEPORT' # Som tocado enquanto os blocos estão girando ao redor do jogador
+  remove-sound: 'ITEM_BREAK' # Som reproduzido quando cada bloco é removido da animação
+  end-sound: 'LEVEL_UP' # Som tocado ao finalizar completamente a animação
+  block-type: 'TNT' # Material do bloco exibido na animação (aceita MATERIAL ou MATERIAL:ID)
+  particles:
+    remove: 'SMOKE' # Partícula exibida ao remover cada bloco
+    finish: 'ENDER_SIGNAL' # Partícula exibida no final da animação
+
+
 messages:
   no_player: '&cApenas jogadores podem executar este comando!' # Mensagem que irá ser enviada caso o console execute o comando
   usage_give: '&cUso correto: /activator give <player> <activator> <usos>' # Mensagem de uso correto

@@ -21,6 +21,7 @@ public class ActivatorCommand extends BukkitCommand {
 
     public ActivatorCommand() {
         super("activator");
+        setPermission("relicitemcomandos.admin.command");
     }
 
     @Override
@@ -139,7 +140,7 @@ public class ActivatorCommand extends BukkitCommand {
         for (int i = 0; i < lore.size(); i++) {
             lore.set(i, color(lore.get(i)
                     .replace("%player%", player.getName())
-                    .replace("{usos}", String.valueOf(usos)))); // substitui {usos} pelo valor passado
+                    .replace("{usos}", String.valueOf(usos))));
         }
 
         meta.setLore(lore);
